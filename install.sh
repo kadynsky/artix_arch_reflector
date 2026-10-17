@@ -29,8 +29,10 @@ sudo cp -a -v "$PWD/main.sh" '/usr/bin/supreme_reflector'
 # Install service
 sudo mkdir -p '/etc/service/supreme_reflector'
 sudo touch '/etc/service/supreme_reflector/run'
+
 sudo tee '/etc/service/supreme_reflector/run' <<'EOF'
 #!/usr/bin/env sh
+sv check connmand >/dev/null 2>&1 || exit 1
 while true; do
     /usr/bin/supreme_reflector 2>/dev/null > /etc/pacman.d/mirrorlist
     sleep 24h
